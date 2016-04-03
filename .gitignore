@@ -1,3 +1,14 @@
+#gitignore for darwin project
+
+.DS_Store
+
+*.gcda
+*.gcno
+*.gcov
+
+latex
+Doxyfile
+
 # Object files
 *.o
 *.ko
