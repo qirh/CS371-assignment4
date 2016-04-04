@@ -74,6 +74,34 @@ int main () {
     // darwin 8x8
     // ----------
 
+     Species food;
+     food.addInstruction("LEFT");
+     food.addInstruction("GO", 0);
+
+     Species hopper;
+     hopper.addInstruction("HOP");
+     hopper.addInstruction("GO", 0);
+
+     Species rover;
+     rover.addInstruction("IF_ENEMY", 9);
+     rover.addInstruction("IF_EMPTY", 7);
+     rover.addInstruction("IF_RANDOM", 5);
+     rover.addInstruction("LEFT");
+     rover.addInstruction("GO", 0);
+     rover.addInstruction("RIGHT");
+     rover.addInstruction("GO", 0);
+     rover.addInstruction("HOP");
+     rover.addInstruction("GO", 0);
+     rover.addInstruction("INFECT");
+     rover.addInstruction("GO", 0);
+
+     Species trap;
+     trap.addInstruction("IF_ENEMY", 3);
+     trap.addInstruction("LEFT");
+     trap.addInstruction("GO", 0);
+     trap.addInstruction("INFECT");
+     trap.addInstruction("GO", 0);
+
     cout << "*** Darwin 8x8 ***" << endl;
     /*
     8x8 Darwin
@@ -86,6 +114,23 @@ int main () {
     Simulate 5 moves.
     Print every grid.
     */
+
+    Creature f1(food, 1);
+    Creature h1(hopper, 0);
+    Creature h2(hopper, 1);
+    Creature h3(hopper, 2);
+    Creature h4(hopper, 3);
+    Creature f2(food, 0);
+
+    Darwin board(8, 8);
+    board.addCreature(f1, 0, 0);
+    board.addCreature(h1, 3, 3);
+    board.addCreature(h2, 3, 4);
+    board.addCreature(h3, 4, 4);
+    board.addCreature(h4, 4, 3);
+    board.addCreature(f2, 7, 7);
+    board.simulate(5);
+    board.show();
 
     // ----------
     // darwin 7x9
