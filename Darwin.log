@@ -1,0 +1,11 @@
+commit 92bac7c5b845067f2d5dfa680b57f26ae9c2f751
+Author: vohl <acvohl@gmail.com>
+Date:   Sun Apr 3 15:21:40 2016 -0500
+
+    Just adding makefile, and travis
+
+commit 7106975ef2bbc11d9c6d795fd9c5bf1c442e14f8
+Author: almto3 <almto3@hotmail.com>
+Date:   Sat Apr 2 13:31:45 2016 -0500
+
+    Initial commit

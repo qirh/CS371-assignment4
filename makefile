@@ -19,72 +19,71 @@ VALGRIND := valgrind
 
 
 check:
-    @not_found=0;                                 \
-    for i in $(FILES);                            \
-    do                                            \
-        if [ -e $$i ];                            \
-        then                                      \
-            echo "$$i found";                     \
-        else                                      \
-            echo "$$i NOT FOUND";                 \
-            not_found=`expr "$$not_found" + "1"`; \
-        fi                                        \
-    done;                                         \
-    if [ $$not_found -ne 0 ];                     \
-    then                                          \
-        echo "$$not_found failures";              \
-        exit 1;                                   \
-    fi;                                           \
-    echo "success";
+	@not_found=0;                                 \
+	for i in $(FILES);                            \
+	do                                            \
+		if [ -e $$i ];                            \
+		then                                      \
+			echo "$$i found";                     \
+		else                                      \
+			echo "$$i NOT FOUND";                 \
+			not_found=`expr "$$not_found" + "1"`; \
+		fi                                        \
+	done;                                         \
+	if [ $$not_found -ne 0 ];                     \
+	then                                          \
+		echo "$$not_found failures";              \
+		exit 1;                                   \
+	fi;                                           \
+	echo "success";
 
 clean:
-    rm -f *.gcda
-    rm -f *.gcno
-    rm -f *.gcov
-    rm -f RunDarwin
-    rm -f RunDarwin.tmp
-    rm -f TestDarwin
-    rm -f TestDarwin.out
+	rm -f *.gcda
+	rm -f *.gcno
+	rm -f *.gcov
+	rm -f RunDarwin
+	rm -f RunDarwin.tmp
+	rm -f TestDarwin
 
 config:
-    git config -l
+	git config -l
 
 scrub:
-    make clean
-    rm -f Darwin.log
-    rm -rf html
-    rm -rf latex
+	make clean
+	rm -f Darwin.log
+	rm -rf html
+	rm -rf latex
 
 status:
-    make clean
-    @echo
-    git branch
-    git remote -v
-    git status
+	make clean
+	@echo
+	git branch
+	git remote -v
+	git status
 
 html: Doxyfile Darwin.h Darwin.c++ RunDarwin.c++ TestDarwin.c++
-    doxygen Doxyfile
+	doxygen Doxyfile
 
 Darwin.log:
-    git log > Darwin.log
+	git log > Darwin.log
 
 Doxyfile:
-    doxygen -g
+	doxygen -g
 
 test: RunDarwin.tmp TestDarwin.out
 
 RunDarwin: Darwin.h Darwin.c++ RunDarwin.c++
-    $(CXX) $(CXXFLAGS) $(GCOVFLAGS) Darwin.c++ RunDarwin.c++ -o RunDarwin
+	$(CXX) $(CXXFLAGS) $(GCOVFLAGS) Darwin.c++ RunDarwin.c++ -o RunDarwin
 
 RunDarwin.tmp: RunDarwin
-    ./RunDarwin > RunDarwin.tmp
-    diff RunDarwin.tmp RunDarwin.out
+	./RunDarwin > RunDarwin.tmp
+	diff RunDarwin.tmp RunDarwin.out
 
 TestDarwin: Darwin.h Darwin.c++ TestDarwin.c++
-    $(CXX) $(CXXFLAGS) $(GCOVFLAGS) Darwin.c++ TestDarwin.c++ -o TestDarwin $(LDFLAGS)
+	$(CXX) $(CXXFLAGS) $(GCOVFLAGS) Darwin.c++ TestDarwin.c++ -o TestDarwin $(LDFLAGS)
 
 TestDarwin.out: TestAllocator
-    $(VALGRIND) ./TestDarwin > TestDarwin.out 2>&1
-    $(GCOV) -b Darwin.c++ | grep -A 5 "File 'Darwin.c++'" >> TestDarwin.out
-    $(GCOV) -b TestDarwin.c++ | grep -A 5 "File 'TestDarwin.c++'" >> TestDarwin.out
-    cat TestDarwin.out
+	$(VALGRIND) ./TestDarwin > TestDarwin.out 2>&1
+	$(GCOV) -b Darwin.c++ | grep -A 5 "File 'Darwin.c++'" >> TestDarwin.out
+	$(GCOV) -b TestDarwin.c++ | grep -A 5 "File 'TestDarwin.c++'" >> TestDarwin.out
+	cat TestDarwin.out
