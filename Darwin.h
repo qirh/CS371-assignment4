@@ -80,7 +80,6 @@ private:
     int _x, _y;
     vector<Creature *> _board;
 
-
 public:
     Darwin(int x, int y);
 

@@ -115,22 +115,22 @@ int main () {
     Print every grid.
     */
 
-    Creature f1(food, 1);
-    Creature h1(hopper, 0);
-    Creature h2(hopper, 1);
-    Creature h3(hopper, 2);
-    Creature h4(hopper, 3);
-    Creature f2(food, 0);
+    Creature t1_f1(food, 1);
+    Creature t1_h1(hopper, 0);
+    Creature t1_h2(hopper, 1);
+    Creature t1_h3(hopper, 2);
+    Creature t1_h4(hopper, 3);
+    Creature t1_f2(food, 0);
 
-    Darwin board(8, 8);
-    board.addCreature(f1, 0, 0);
-    board.addCreature(h1, 3, 3);
-    board.addCreature(h2, 3, 4);
-    board.addCreature(h3, 4, 4);
-    board.addCreature(h4, 4, 3);
-    board.addCreature(f2, 7, 7);
-    board.simulate(5);
-    board.show();
+    Darwin t1_board(8, 8);
+    t1_board.addCreature(t1_f1, 0, 0);
+    t1_board.addCreature(t1_h1, 3, 3);
+    t1_board.addCreature(t1_h2, 3, 4);
+    t1_board.addCreature(t1_h3, 4, 4);
+    t1_board.addCreature(t1_h4, 4, 3);
+    t1_board.addCreature(t1_f2, 7, 7);
+    t1_board.simulate(5);
+    t1_board.show();
 
     // ----------
     // darwin 7x9
@@ -147,6 +147,19 @@ int main () {
     Simulate 5 moves.
     Print every grid.
     */
+
+    Creature t2_t1(trap, 2);
+    Creature t2_h1(hopper, 1);
+    Creature t2_r1(rover, 0);
+    Creature t2_t2(trap, 3);
+
+    Darwin t2_board(7, 9);
+    t2_board.addCreature(t2_t1, 0, 0);
+    t2_board.addCreature(t2_h1, 3, 2);
+    t2_board.addCreature(t2_r1, 5, 4);
+    t2_board.addCreature(t2_t2, 6, 8);
+    t2_board.simulate(5);
+    t2_board.show();
 
     // ------------
     // darwin 72x72
