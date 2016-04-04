@@ -1,16 +1,30 @@
 #include <iostream>
+#include <string>
 #include <vector>
+#include <algorithm>
 #include "Darwin.h"
 
 using namespace std;
 
-struct instruction{
-	instr _name;
-	int _branch;
+//Species methods
+Species::Species(string name) : _name(name){}
 
-	instruction() : _name(-1), _branch(-1){}
+void Species::addInstruction(string action){
+	transform(action.begin(), action.end(), action.begin(), toupper);
+	if (){
 
-	bool operator == (const instruction &rhs){
-		return ((_name == rhs._name) && (_branch == rhs._branch));
 	}
-};
+	_instruction_set.push_back(i);
+}
+
+void Species::addInstruction(string control, int branch){
+	_instruction_set.push_back(i);
+}
+
+int Species::executeTilAction(object obj, Creature &rhs){
+
+}
+
+bool Species::operator == (const Species &rhs){
+	return equal(_name.begin(), _name.end(), rhs._name.begin());
+}

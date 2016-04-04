@@ -1,3 +1,6 @@
+#ifndef DARWIN_H
+#define DARWIN_H
+
 //Species -> Creature -> Darwin Board
 
 //Species has a set of instructions or a program that it runs through
@@ -7,6 +10,7 @@
 //---------
 
 #include <iostream>
+#include <string>
 #include <vector>
 
 using namespace std;
@@ -27,18 +31,15 @@ struct instruction{
 public:
     instr _name;
     int _branch;
-
-    instruction();
-
-    bool operator == (const instruction &rhs);
 };
 
 class Species{
 private:
     vector<instruction> _instructions_set;
+    string _name;
 
 public:
-    Species();
+    Species(string name);
 
     void addInstruction(string action);
 
@@ -89,3 +90,5 @@ public:
 
     show();
 };
+
+#endif
