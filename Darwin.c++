@@ -8,9 +8,7 @@
 using namespace std;
 
 //Species methods
-Species::Species(string name) : _name(name){
-    _name_ptr = &_name;
-}
+Species::Species(string name) : _name(name){}
 
 void Species::addInstruction(string action){
 	transform(action.begin(), action.end(), action.begin(), toupper);
@@ -64,7 +62,7 @@ void Species::addInstruction(string control, const int &branch){
 	_instruction_set.push_back(i);
 }
 
-instruction Species::executeTilAction(object obj, const Species &target, int &pc){
+instruction Species::executeTilAction(object obj, const Creature &target, int &pc){
     bool done = false;
 
     while (!done){
@@ -93,7 +91,7 @@ instruction Species::executeTilAction(object obj, const Species &target, int &pc
             }
         }
         else if (_instruction_set[pc] == IF_ENEMY){
-            if ((obj == ENTITY) && (*this != target)){
+            if ((obj == ENTITY) && (!target.isRelated(*this))){
                 pc = _instruction_set[pc]._branch;
             }
             else{
@@ -115,17 +113,17 @@ bool Species::operator == (const Species &rhs){
 	return equal(_name.begin(), _name.end(), rhs._name.begin());
 }
 
-bool Species::operator != (const Species &rhs){
-    return !(*this == rhs);
+Creature::Creature(Species spe, int dir) :_spe(spe), _dir(dir), _pc(0){
+    _ptr_dir = &_dir;
 }
 
-Creature::Creature(Species spe, int dir) :_spe(spe), _dir(dir), _pc(0){}
-
-void Creature::executeAction(object obj, Creature &target){
-    instruction do_this = executeTilAction(obj, target._spe, _pc);
+bool Creature::executeAction(object obj, Creature &target){
+    instruction do_this = executeTilAction(obj, target, _pc);
 
     if (do_this._name == HOP){
         //how do i move him on the board
+        ++_pc;
+        return true;
     }
     else if (do_this._name == LEFT){
         if (_dir == NORTH){
@@ -159,4 +157,11 @@ void Creature::executeAction(object obj, Creature &target){
         target._spe = _spe;
         target._pc = 0;
     }
+
+    ++_pc;
+    return false;
+}
+
+bool Creature::isRelated(const Species &rhs){
+    return (_spe == rhs);
 }

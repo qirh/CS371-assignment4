@@ -38,19 +38,15 @@ private:
     string _name;
 
 public:
-    string const * _name_ptr;
-
     Species(string name);
 
     void addInstruction(string action);
 
     void addInstruction(string control, const int &branch);
 
-    instruction executeTilAction(object obj, const Species &rhs, int &pc);
+    instruction executeTilAction(object obj, const Creature &rhs, int &pc);
 
     bool operator == (const Species &rhs);
-
-    bool operator != (const Species &rhs);
 };
 
 //-----------
@@ -68,9 +64,9 @@ public:
 
     Creature(Species spe, int dir);
 
-    void executeAction(object obj, Creature &target);
+    bool executeAction(object obj, Creature &target);
 
-    bool isRelated(const Creature &rhs);
+    bool isRelated(const Species &rhs);
 };
 
 
