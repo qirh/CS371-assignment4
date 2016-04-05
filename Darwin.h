@@ -9,7 +9,6 @@
 // include
 //---------
 
-#include <iostream>
 #include <string>
 #include <vector>
 
@@ -39,16 +38,19 @@ private:
     string _name;
 
 public:
+    string const * _name_ptr;
+
     Species(string name);
 
     void addInstruction(string action);
 
-    void addInstruction(string control, int branch);
+    void addInstruction(string control, const int &branch);
 
-    //return the new pc for the creature
-    int executeTilAction(object obj, Creature &rhs);
+    void executeTilAction(object obj, const Creature &rhs, int &pc);
 
     bool operator == (const Species &rhs);
+
+    bool operator != (const Species &rhs);
 };
 
 //-----------

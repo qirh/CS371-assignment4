@@ -1,3 +1,4 @@
+#include <cstdlib>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -7,24 +8,111 @@
 using namespace std;
 
 //Species methods
-Species::Species(string name) : _name(name){}
+Species::Species(string name) : _name(name){
+    _name_ptr = &_name;
+}
 
 void Species::addInstruction(string action){
 	transform(action.begin(), action.end(), action.begin(), toupper);
-	if (){
 
+    instruction i;
+
+	if (action == "HOP"){
+        i._name = HOP;
 	}
+    else if (action == "LEFT"){
+        i._name = LEFT;
+    }
+    else if (action == "RIGHT"){
+        i._name = RIGHT;
+    }
+    else if (action == "INFECT"){
+        i._name = INFECT;
+    }
+
+    i._branch = -1;
+
 	_instruction_set.push_back(i);
 }
 
-void Species::addInstruction(string control, int branch){
+void Species::addInstruction(string control, const int &branch){
+    transform(action.begin(), action.end(), action.begin(), toupper);
+
+    instruction i;
+
+    if (action == "IF_EMPTY"){
+        i._name = IF_EMPTY;
+        i._branch = branch;
+    }
+    else if (action == "IF_WALL"){
+        i._name = IF_WALL;
+        i._branch = branch;
+    }
+    else if (action == "IF_RANDOM"){
+        i._name = IF_RANDOM;
+        i._branch = branch;
+    }
+    else if (action == "IF_ENEMY"){
+        i._name = IF_ENEMY;
+        i._branch = branch;
+    }
+    else if (action == "GO"){
+        i._name = GO;
+        i._branch = branch;
+    }
+
 	_instruction_set.push_back(i);
 }
 
-int Species::executeTilAction(object obj, Creature &rhs){
+void Species::executeTilAction(object obj, const Creature &target, int &pc){
+    bool done = false;
 
+    while (!done){
+        if (_instruction_set[pc] == IF_EMPTY){
+            if (obj == EMPTY){
+                pc = _instruction_set[pc]._branch;
+            }
+            else{
+                ++pc;
+            }
+        }
+        else if (_instruction_set[pc] == IF_WALL){
+            if (obj == WALL){
+                pc = _instruction_set[pc]._branch;
+            }
+            else{
+                ++pc;
+            }
+        }
+        else if (_instruction_set[pc] == IF_RANDOM){
+            if (rand() % 2){
+                pc = _instruction_set[pc]._branch;
+            }
+            else{
+                ++pc;
+            }
+        }
+        else if (_instruction_set[pc] == IF_ENEMY){
+            if ((obj == ENTITY) && (this != target._spe)){
+                pc = _instruction_set[pc]._branch;
+            }
+            else{
+                ++pc;
+            }
+        }
+        else if (_instruction_set[pc] == GO){
+            pc = _instruction_set[pc]._branch;
+        }
+        else{
+            done = true;
+        }
+    }
 }
 
 bool Species::operator == (const Species &rhs){
 	return equal(_name.begin(), _name.end(), rhs._name.begin());
+}
+
+bool Species::operator != (const Species &rhs){
+    return !(this == rhs);
 }
