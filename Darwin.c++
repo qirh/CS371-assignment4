@@ -64,7 +64,7 @@ void Species::addInstruction(string control, const int &branch){
 	_instruction_set.push_back(i);
 }
 
-void Species::executeTilAction(object obj, const Creature &target, int &pc){
+instruction Species::executeTilAction(object obj, const Species &target, int &pc){
     bool done = false;
 
     while (!done){
@@ -93,7 +93,7 @@ void Species::executeTilAction(object obj, const Creature &target, int &pc){
             }
         }
         else if (_instruction_set[pc] == IF_ENEMY){
-            if ((obj == ENTITY) && (this != target._spe)){
+            if ((obj == ENTITY) && (*this != target)){
                 pc = _instruction_set[pc]._branch;
             }
             else{
@@ -107,6 +107,8 @@ void Species::executeTilAction(object obj, const Creature &target, int &pc){
             done = true;
         }
     }
+
+    return _instruction_set[pc];
 }
 
 bool Species::operator == (const Species &rhs){
@@ -114,5 +116,48 @@ bool Species::operator == (const Species &rhs){
 }
 
 bool Species::operator != (const Species &rhs){
-    return !(this == rhs);
+    return !(*this == rhs);
+}
+
+Creature::Creature(Species spe, int dir) :_spe(spe), _dir(dir){
+    _pc = 0;
+}
+
+void Creature::executeAction(object obj, Creature &rhs){
+    instruction do_this = executeTilAction(obj, rhs._spe, _pc);
+
+    if (do_this._name == HOP){
+        //how do i move him on the board
+    }
+    else if (do_this._name == LEFT){
+        if (_dir == NORTH){
+            _dir = WEST;
+        }
+        else if (_dir == EAST){
+            _dir = NORTH;
+        }
+        else if (_dir == SOUTH){
+            _dir = EAST;
+        }
+        else if (_dir == WEST){
+            _dir = SOUTH;
+        }
+    }
+    else if (do_this._name == RIGHT){
+        if (_dir == NORTH){
+            _dir = EAST;
+        }
+        else if (_dir == EAST){
+            _dir = SOUTH;
+        }
+        else if (_dir == SOUTH){
+            _dir = WEST;
+        }
+        else if (_dir == WEST){
+            _dir = NORTH;
+        }
+    }
+    else if (do_this._name == INFECT){
+        rhs._spe = _spe;
+    }
 }

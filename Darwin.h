@@ -46,7 +46,7 @@ public:
 
     void addInstruction(string control, const int &branch);
 
-    void executeTilAction(object obj, const Creature &rhs, int &pc);
+    instruction executeTilAction(object obj, const Species &rhs, int &pc);
 
     bool operator == (const Species &rhs);
 
