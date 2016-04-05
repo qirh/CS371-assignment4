@@ -119,12 +119,10 @@ bool Species::operator != (const Species &rhs){
     return !(*this == rhs);
 }
 
-Creature::Creature(Species spe, int dir) :_spe(spe), _dir(dir){
-    _pc = 0;
-}
+Creature::Creature(Species spe, int dir) :_spe(spe), _dir(dir), _pc(0){}
 
-void Creature::executeAction(object obj, Creature &rhs){
-    instruction do_this = executeTilAction(obj, rhs._spe, _pc);
+void Creature::executeAction(object obj, Creature &target){
+    instruction do_this = executeTilAction(obj, target._spe, _pc);
 
     if (do_this._name == HOP){
         //how do i move him on the board
@@ -158,6 +156,7 @@ void Creature::executeAction(object obj, Creature &rhs){
         }
     }
     else if (do_this._name == INFECT){
-        rhs._spe = _spe;
+        target._spe = _spe;
+        target._pc = 0;
     }
 }

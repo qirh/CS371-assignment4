@@ -68,7 +68,7 @@ public:
 
     Creature(Species spe, int dir);
 
-    void executeAction(object obj, Creature &rhs);
+    void executeAction(object obj, Creature &target);
 
     bool isRelated(const Creature &rhs);
 };
