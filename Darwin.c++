@@ -165,3 +165,21 @@ bool Creature::executeAction(object obj, Creature &target){
 bool Creature::isRelated(const Species &rhs){
     return (_spe == rhs);
 }
+
+Darwin::Darwin(int x, int y) : _x(x), _y(y){
+    for(int i = 0; i < (_x*_y); ++i){
+        _board.push_back(nullptr);
+    }
+}
+
+void Darwin::addCreature(const Creature &cr, const int &cr_x, const int &cr_y){
+    _board[cr_y*_x+cr_x] = &cr;
+}
+
+void Darwin::simulate(int cycles){
+
+}
+
+void Darwin::show(){
+
+}

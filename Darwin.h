@@ -82,11 +82,11 @@ private:
 public:
     Darwin(int x, int y);
 
-    addCreature(Creature cr, int cr_x, int cr_y);
+    void addCreature(const Creature &cr, const int &cr_x, const int &cr_y);
 
-    simulate(int cycles);
+    void simulate(int cycles);
 
-    show();
+    void show();
 };
 
 #endif
