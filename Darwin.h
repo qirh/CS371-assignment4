@@ -38,6 +38,8 @@ private:
     string _name;
 
 public:
+    string const * _ptr_name;
+
     Species(string name);
 
     void addInstruction(string action);
@@ -47,6 +49,7 @@ public:
     instruction executeTilAction(object obj, const Creature &rhs, int &pc);
 
     bool operator == (const Species &rhs);
+
 };
 
 //-----------
@@ -67,6 +70,8 @@ public:
     bool executeAction(object obj, Creature &target);
 
     bool isRelated(const Species &rhs);
+
+    string firstInital();
 };
 
 
