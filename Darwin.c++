@@ -319,7 +319,7 @@ void Darwin::show(){
 			if(_board[j] == nullptr)
 				cout << ".";
 			else
-				cout << _board[j]._name
+				cout << _board[j].firstInital();
 
 		}
 }
