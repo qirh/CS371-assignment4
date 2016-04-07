@@ -12,7 +12,9 @@ using namespace std;
 Species::Species(){}
 
 //Species methods
-Species::Species(string name) : _name(name){}
+Species::Species(string name) : _name(name){
+    _ptr_name = &_name;
+}
 
 void Species::addInstruction(string action){
 	transform(action.begin(), action.end(), action.begin(), toupper);
