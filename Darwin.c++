@@ -178,7 +178,7 @@ bool Creature::executeAction(object obj, Creature &target){
         }
     }
     else if (do_this._name == INFECT && target != nullptr){
-    	if (!(*this).isRelated((*target)._spe)){
+    	if (_spe != target._spe){
         	target._spe = _spe;
         	target._pc = 0;
         }
@@ -196,6 +196,8 @@ bool Creature::firstInital(){
     return *(_spe._ptr_name)[0];
 }
 
+Darwin::Darwin(){}
+
 Darwin::Darwin(int x, int y) : _x(x), _y(y){
 	assert(x > 0);
 	assert(y > 0);
@@ -206,7 +208,7 @@ Darwin::Darwin(int x, int y) : _x(x), _y(y){
 }
 
 void Darwin::addCreature(const Creature &cr, const int &cr_x, const int &cr_y){
-	
+
 	if (&cr_x >= _x || &cr_y >= _y)
 		throw invalid_argument( "invalid instruction, x or y are too high" );
 	if (&cr_x < 0 || &cr_y < 0)
@@ -219,12 +221,12 @@ void Darwin::addCreature(const Creature &cr, const int &cr_x, const int &cr_y){
 }
 
 void Darwin::simulate(int cycles){
-	
+
 
 	cout << "*** Darwin " << _x << "x" << _y << " ***";
 
-	//int is the j, bool will be true if we shouldn't execute this creature 
-	unordered_map<int,bool> _map;	
+	//int is the j, bool will be true if we shouldn't execute this creature
+	unordered_map<int,bool> _map;
 	object foo = nullptr;
 	Creature bar = nullptr;
 
@@ -248,11 +250,11 @@ void Darwin::simulate(int cycles){
 						foo = WALL;
 					else if(_board[j -_x] == nullptr)
 						foo = EMPTY;
-           			
+
            			else{
 						foo = ENTITY;
            				bar = _board[j-_x];
-           			}	
+           			}
       			}
         		else if (*(_board[j]._ptr_dir) == SOUTH){
             		if (j > ((_x*_y) - _x))
@@ -276,7 +278,7 @@ void Darwin::simulate(int cycles){
 					else{
 						foo = ENTITY;
            				bar = _board[j+1];
-           			}	
+           			}
         		}
         		else if (*(_board[j]._ptr_dir) == WEST){
             		if ((j) == 0)
@@ -328,10 +330,10 @@ void Darwin::show(){
 			cout << i%10;
 
 		for(int j = 0; j < _x*_y; j++){
-			
+
 			if ( (j%_x) == 0)
 				cout << "\n" << (j%_y)%10 << " ";
-			
+
 			if(_board[j] == nullptr)
 				cout << ".";
 			else

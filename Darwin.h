@@ -89,6 +89,8 @@ private:
     vector<Creature *> _board;
 
 public:
+    Darwin();
+
     Darwin(int x, int y);
 
     void addCreature(const Creature &cr, const int &cr_x, const int &cr_y);
