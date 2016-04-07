@@ -74,15 +74,15 @@ int main () {
     // darwin 8x8
     // ----------
 
-     Species food;
+     Species food("food");
      food.addInstruction("LEFT");
      food.addInstruction("GO", 0);
 
-     Species hopper;
+     Species hopper("hopper");
      hopper.addInstruction("HOP");
      hopper.addInstruction("GO", 0);
 
-     Species rover;
+     Species rover("rover");
      rover.addInstruction("IF_ENEMY", 9);
      rover.addInstruction("IF_EMPTY", 7);
      rover.addInstruction("IF_RANDOM", 5);
@@ -95,7 +95,7 @@ int main () {
      rover.addInstruction("INFECT");
      rover.addInstruction("GO", 0);
 
-     Species trap;
+     Species trap("trap");
      trap.addInstruction("IF_ENEMY", 3);
      trap.addInstruction("LEFT");
      trap.addInstruction("GO", 0);
@@ -103,6 +103,7 @@ int main () {
      trap.addInstruction("GO", 0);
 
     cout << "*** Darwin 8x8 ***" << endl;
+    srand(0);
     /*
     8x8 Darwin
     Food,   facing east,  at (0, 0)
@@ -130,7 +131,6 @@ int main () {
     t1_board.addCreature(t1_h4, 4, 3);
     t1_board.addCreature(t1_f2, 7, 7);
     t1_board.simulate(5);
-    t1_board.show();
 
     // ----------
     // darwin 7x9
@@ -159,7 +159,6 @@ int main () {
     t2_board.addCreature(t2_r1, 5, 4);
     t2_board.addCreature(t2_t2, 6, 8);
     t2_board.simulate(5);
-    t2_board.show();
 
     // ------------
     // darwin 72x72

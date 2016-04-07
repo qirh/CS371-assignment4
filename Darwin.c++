@@ -214,7 +214,7 @@ bool Creature::executeAction(object obj, Creature * const target){
 }
 
 char Creature::firstInital(){
-    return (*(_spe._ptr_name))[0];
+    return tolower((*(_spe._ptr_name))[0]);
 }
 
 Darwin::Darwin(){}
@@ -242,17 +242,14 @@ void Darwin::addCreature(Creature &cr, const int &cr_x, const int &cr_y){
 }
 
 void Darwin::simulate(int cycles){
-	cout << "*** Darwin " << _x << "x" << _y << " ***" << endl;
-
 	//int is the j, bool will be true if we shouldn't execute this creature
-    cout << "Hi" << endl;
-	unordered_map<int,bool> _map;
-	object foo = EMPTY;
-	Creature * bar = nullptr;
+    unordered_map<int,bool> _map;
+    object foo = EMPTY;
+    Creature * bar = nullptr;
 
-	for (int i = 0; i< cycles; i++){		//loop for cycles
-		cout << "Turn = " << i << ".";
-		show();
+    for (int i = 0; i< cycles; i++){        //loop for cycles
+        cout << "Turn = " << i << "." << endl;
+        (*this).show();
 		_map.clear();
 		for (int j =0; j< _x*_y; j++){
 
@@ -358,20 +355,22 @@ void Darwin::simulate(int cycles){
 
 void Darwin::show(){
 
-		cout << "  ";
+        cout << "  ";
 
-		for(int i = 0; i < _x; i++)
-			cout << i%10;
+        for(int i = 0; i < _x; i++)
+            cout << i%10;
 
-		for(int j = 0; j < _x*_y; j++){
+        for(int j = 0; j < _x*_y; j++){
 
-			if ( (j%_x) == 0)
-				cout << "\n" << (j%_y)%10 << " ";
+            if ( (j%_x) == 0)
+                cout << "\n" << (j/_y)%10 << " ";
 
-			if(_board[j] == nullptr)
-				cout << ".";
-			else
-				cout << tolower((*_board[j]).firstInital());
+            if(_board[j] == nullptr){
+                cout << ".";
+            }
+			else{
+                cout << (*_board[j]).firstInital();
+            }
 
 		}
 }
