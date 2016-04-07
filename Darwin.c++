@@ -9,6 +9,8 @@
 
 using namespace std;
 
+Species::Species(){}
+
 //Species methods
 Species::Species(string name) : _name(name){}
 
@@ -19,16 +21,16 @@ void Species::addInstruction(string action){
 
 	if (action == "HOP")
         i._name = HOP;
-	
+
     else if (action == "LEFT")
         i._name = LEFT;
-    
+
     else if (action == "RIGHT")
         i._name = RIGHT;
-    
+
     else if (action == "INFECT")
         i._name = INFECT;
-    
+
     else
     	throw invalid_argument( "invalid instruction" );
 
@@ -119,10 +121,22 @@ instruction Species::executeTilAction(object obj, const Creature &target, int &p
 }
 
 bool Species::operator == (const Species &rhs){
-	return equal(_name.begin(), _name.end(), rhs._name.begin());
+	return this->_name == rhs._name;
 }
 
-Creature::Creature(Species spe, int dir) :_spe(spe), _dir(dir), _pc(0){
+Creature::Creature(){}
+
+Creature::Creature(Species spe, int dir) :_spe(spe), _pc(0){
+    if (dir == 0)
+        _dir = NORTH;
+    else if (dir == 1)
+        _dir = EAST;
+    else if (dir == 2)
+        _dir = SOUTH;
+    else if (dir == 3)
+        _dir = WEST;
+    else
+        throw invalid_argument("invalid_argument");
     _ptr_dir = &_dir;
 }
 

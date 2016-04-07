@@ -40,6 +40,8 @@ private:
 public:
     string const * _ptr_name;
 
+    Species();
+
     Species(string name);
 
     void addInstruction(string action);
@@ -64,6 +66,8 @@ private:
 
 public:
     direc const * _ptr_dir;
+
+    Creature();
 
     Creature(Species spe, int dir);
 
