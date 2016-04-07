@@ -4,6 +4,7 @@
 #include <vector>
 #include <algorithm>
 #include <stdexcept>
+#include <cassert>
 #include <unordered_map>
 #include "Darwin.h"
 
@@ -219,19 +220,19 @@ char Creature::firstInital(){
 Darwin::Darwin(){}
 
 Darwin::Darwin(int x, int y) : _x(x), _y(y){
-	assert(x > 0);
-	assert(y > 0);
+	assert(_x > 0);
+	assert(_y > 0);
 
     for(int i = 0; i < (_x*_y); ++i){
         _board.push_back(nullptr);
     }
 }
 
-void Darwin::addCreature(const Creature &cr, const int &cr_x, const int &cr_y){
+void Darwin::addCreature(Creature &cr, const int &cr_x, const int &cr_y){
 
-	if (&cr_x >= _x || &cr_y >= _y)
+	if (cr_x >= _x || cr_y >= _y)
 		throw invalid_argument( "invalid instruction, x or y are too high" );
-	if (&cr_x < 0 || &cr_y < 0)
+	if (cr_x < 0 || cr_y < 0)
 		throw invalid_argument( "invalid instruction, x or y are negative" );
 
 	if (_board[cr_y*_x+cr_x] == nullptr)
@@ -241,14 +242,12 @@ void Darwin::addCreature(const Creature &cr, const int &cr_x, const int &cr_y){
 }
 
 void Darwin::simulate(int cycles){
-
-
 	cout << "*** Darwin " << _x << "x" << _y << " ***";
 
 	//int is the j, bool will be true if we shouldn't execute this creature
 	unordered_map<int,bool> _map;
-	object foo = nullptr;
-	Creature bar = nullptr;
+	object foo = EMPTY;
+	Creature * bar = nullptr;
 
 	for (int i = 0; i< cycles; i++){		//loop for cycles
 		cout << "Turn = " << i << ".";
@@ -256,88 +255,88 @@ void Darwin::simulate(int cycles){
 		_map.clear();
 		for (int j =0; j< _x*_y; j++){
 
-			if(_board[j] == nullptr)
-				continue;
-			try{
-				_map.at(j)
-			}
-			//if we catch an exception, it means that creature hasn't been mapped and hasn't had a turn
-			catch(const std::out_of_range& oor){
+			if(_board[j] != nullptr){
+    			try{
+    				_map.at(j);
+    			}
+    			//if we catch an exception, it means that creature hasn't been mapped and hasn't had a turn
+    			catch(const std::out_of_range& oor){
 
-				//get the object and the target!
-				if ( *(_board[j]._ptr_dir) == NORTH){
-					if (j < (_x-a))
-						foo = WALL;
-					else if(_board[j -_x] == nullptr)
-						foo = EMPTY;
+    				//get the object and the target!
+    				if ( *((*(_board[j]))._ptr_dir) == NORTH){
+    					if (j < (_x))
+    						foo = WALL;
+    					else if(_board[j -_x] == nullptr)
+    						foo = EMPTY;
 
-           			else{
-						foo = ENTITY;
-           				bar = _board[j-_x];
-           			}
-      			}
-        		else if (*(_board[j]._ptr_dir) == SOUTH){
-            		if (j > ((_x*_y) - _x))
-						foo = WALL;
+               			else{
+    						foo = ENTITY;
+               				bar = _board[j-_x];
+               			}
+          			}
+            		else if (*((*(_board[j]))._ptr_dir) == SOUTH){
+                		if (j > ((_x*_y) - _x))
+    						foo = WALL;
 
-					else if(_board[j+_x] == nullptr)
-						foo = EMPTY;
+    					else if(_board[j+_x] == nullptr)
+    						foo = EMPTY;
 
-					else{
-						foo = ENTITY;
-           				bar = _board[j+_x];
-           			}
-        		}
-      			else if (*(_board[j]._ptr_dir) == EAST){
-            		if ((j-1) < (_x*_y))
-						foo = WALL;
+    					else{
+    						foo = ENTITY;
+               				bar = _board[j+_x];
+               			}
+            		}
+          			else if (*((*(_board[j]))._ptr_dir) == EAST){
+                		if ((j-1) < (_x*_y))
+    						foo = WALL;
 
-					else if(_board[j+1] == nullptr)
-						foo = EMPTY;
+    					else if(_board[j+1] == nullptr)
+    						foo = EMPTY;
 
-					else{
-						foo = ENTITY;
-           				bar = _board[j+1];
-           			}
-        		}
-        		else if (*(_board[j]._ptr_dir) == WEST){
-            		if ((j) == 0)
-						foo = WALL;
-					else if(_board[j-1] == ENTITY)
-						foo = EMPTY;
-					else{
-						foo = ENTITY;
-           				bar = _board[j-1];
-           			}
-        		}
-				//execute
-				if(_board[j].executeAction(foo, bar)){
+    					else{
+    						foo = ENTITY;
+               				bar = _board[j+1];
+               			}
+            		}
+            		else if (*((*(_board[j]))._ptr_dir) == WEST){
+                		if ((j) == 0)
+    						foo = WALL;
+    					else if(_board[j-1] == ENTITY)
+    						foo = EMPTY;
+    					else{
+    						foo = ENTITY;
+               				bar = _board[j-1];
+               			}
+            		}
+    				//execute
+    				if(_board[j].executeAction(foo, bar)){
 
-					//we need to hop the creature
-					if(foo == EMPTY){
-						if ( *(_board[j]._ptr_dir) == NORTH){
-							_board[j-x] = _board[j];
-							_board[j] = nullptr;
-							_map.at(j-x) = true;		//no need ??
-						}
-						else if ( *(_board[j]._ptr_dir) == SOUTH){
-							_board[j+x] = _board[j];
-							_board[j] = nullptr;
-							_map.at(j+x) = true;
-						}
-						else if ( *(_board[j]._ptr_dir) == EAST){
-							_board[j+1] = _board[j];
-							_board[j] = nullptr;
-							_map.at(j+1) = true;
-						}
-						else if ( *(_board[j]._ptr_dir) == WEST){
-							_board[j-1] = _board[j];
-							_board[j] = nullptr;
-							_map.at(j-1) = true;		//no need ??
-						}
-					}
-				}
-			}
+    					//we need to hop the creature
+    					if(foo == EMPTY){
+    						if ( *(_board[j]._ptr_dir) == NORTH){
+    							_board[j-x] = _board[j];
+    							_board[j] = nullptr;
+    							_map.at(j-x) = true;		//no need ??
+    						}
+    						else if ( *(_board[j]._ptr_dir) == SOUTH){
+    							_board[j+x] = _board[j];
+    							_board[j] = nullptr;
+    							_map.at(j+x) = true;
+    						}
+    						else if ( *(_board[j]._ptr_dir) == EAST){
+    							_board[j+1] = _board[j];
+    							_board[j] = nullptr;
+    							_map.at(j+1) = true;
+    						}
+    						else if ( *(_board[j]._ptr_dir) == WEST){
+    							_board[j-1] = _board[j];
+    							_board[j] = nullptr;
+    							_map.at(j-1) = true;		//no need ??
+    						}
+    					}
+    				}
+    			}
+            }
 		}
 	}
 }
@@ -357,7 +356,7 @@ void Darwin::show(){
 			if(_board[j] == nullptr)
 				cout << ".";
 			else
-				cout << _board[j].firstInital();
+				cout << tolower((*_board[j]).firstInital());
 
 		}
 }

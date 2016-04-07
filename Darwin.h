@@ -84,7 +84,8 @@ public:
 
 class Darwin{
 private:
-    int _x, _y;
+    int _x;
+    int _y;
     vector<Creature *> _board;
 
 public:
@@ -92,7 +93,7 @@ public:
 
     Darwin(int x, int y);
 
-    void addCreature(const Creature &cr, const int &cr_x, const int &cr_y);
+    void addCreature(Creature &cr, const int &cr_x, const int &cr_y);
 
     void simulate(int cycles);
 
