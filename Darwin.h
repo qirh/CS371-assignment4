@@ -38,7 +38,7 @@ private:
     string _name;
 
 public:
-    string const * _ptr_name;
+    const string * _ptr_name;
 
     Species();
 
@@ -48,7 +48,7 @@ public:
 
     void addInstruction(string control, const int &branch);
 
-    instruction executeTilAction(object obj, const Species &rhs, int &pc);
+    instruction executeTilAction(object obj, const Species * const rhs, int &pc);
 
     bool operator == (const Species &rhs);
 
@@ -72,9 +72,9 @@ public:
 
     Creature(Species spe, int dir);
 
-    bool executeAction(object obj, Creature &target);
+    bool executeAction(object obj, Creature * const target);
 
-    string firstInital();
+    char firstInital();
 };
 
 

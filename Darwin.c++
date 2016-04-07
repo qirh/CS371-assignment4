@@ -48,9 +48,9 @@ void Species::addInstruction(string action){
 
 void Species::addInstruction(string control, const int &branch){
     //transform(action.begin(), action.end(), action.begin(), toupper); //issue
-    for (int i = 0; i < (int)action.length(); ++i){
-        if (action[i] >= 'a' && action[i] <= 'z'){
-            toupper(action[i]);
+    for (int i = 0; i < (int)control.length(); ++i){
+        if (control[i] >= 'a' && control[i] <= 'z'){
+            toupper(control[i]);
         }
     }
 
@@ -85,11 +85,11 @@ void Species::addInstruction(string control, const int &branch){
 	_instruction_set.push_back(i);
 }
 
-instruction Species::executeTilAction(object obj, const Species &target, int &pc){
+instruction Species::executeTilAction(object obj, const Species * const target, int &pc){
     bool done = false;
 
     while (!done){
-        if (_instruction_set[pc] == IF_EMPTY){
+        if (_instruction_set[pc]._name == IF_EMPTY){
             if (obj == EMPTY){
                 pc = _instruction_set[pc]._branch;
             }
@@ -97,7 +97,7 @@ instruction Species::executeTilAction(object obj, const Species &target, int &pc
                 ++pc;
             }
         }
-        else if (_instruction_set[pc] == IF_WALL){
+        else if (_instruction_set[pc]._name == IF_WALL){
             if (obj == WALL){
                 pc = _instruction_set[pc]._branch;
             }
@@ -105,7 +105,7 @@ instruction Species::executeTilAction(object obj, const Species &target, int &pc
                 ++pc;
             }
         }
-        else if (_instruction_set[pc] == IF_RANDOM){
+        else if (_instruction_set[pc]._name == IF_RANDOM){
             if (rand() % 2){
                 pc = _instruction_set[pc]._branch;
             }
@@ -113,15 +113,20 @@ instruction Species::executeTilAction(object obj, const Species &target, int &pc
                 ++pc;
             }
         }
-        else if (_instruction_set[pc] == IF_ENEMY){
-            if ((obj == ENTITY) && (*this != target)){
-                pc = _instruction_set[pc]._branch;
+        else if (_instruction_set[pc]._name == IF_ENEMY){
+            if (target != nullptr){
+                if ((obj == ENTITY) && (*this != *target)){
+                    pc = _instruction_set[pc]._branch;
+                }
+                else{
+                    ++pc;
+                }
             }
             else{
                 ++pc;
             }
         }
-        else if (_instruction_set[pc] == GO){
+        else if (_instruction_set[pc]._name == GO){
             pc = _instruction_set[pc]._branch;
         }
         else{
@@ -156,8 +161,13 @@ Creature::Creature(Species spe, int dir) :_spe(spe), _pc(0){
     _ptr_dir = &_dir;
 }
 
-bool Creature::executeAction(object obj, Creature &target){
-    instruction do_this = executeTilAction(obj, target, _pc);
+bool Creature::executeAction(object obj, Creature * const target){
+    instruction do_this;
+
+    if (target != nullptr)
+        do_this = _spe.executeTilAction(obj, &((*target)._spe), _pc);
+    else
+        do_this = _spe.executeTilAction(obj, nullptr, _pc);
 
     if (do_this._name == HOP){
         ++_pc;
@@ -192,9 +202,9 @@ bool Creature::executeAction(object obj, Creature &target){
         }
     }
     else if (do_this._name == INFECT && target != nullptr){
-    	if (_spe != target._spe){
-        	target._spe = _spe;
-        	target._pc = 0;
+    	if (_spe != (*target)._spe){
+        	(*target)._spe = _spe;
+        	(*target)._pc = 0;
         }
     }
 
@@ -202,8 +212,8 @@ bool Creature::executeAction(object obj, Creature &target){
     return false;
 }
 
-bool Creature::firstInital(){
-    return *(_spe._ptr_name)[0];
+char Creature::firstInital(){
+    return (*(_spe._ptr_name))[0];
 }
 
 Darwin::Darwin(){}
