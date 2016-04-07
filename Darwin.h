@@ -34,11 +34,11 @@ public:
 
 class Species{
 private:
-    vector<instruction> _instructions_set;
+    vector<instruction> _instruction_set;
     string _name;
 
 public:
-    string const * _ptr_name;
+    const string * _ptr_name;
 
     Species();
 
@@ -48,10 +48,11 @@ public:
 
     void addInstruction(string control, const int &branch);
 
-    instruction executeTilAction(object obj, const Creature &rhs, int &pc);
+    instruction executeTilAction(object obj, const Species * const rhs, int &pc);
 
     bool operator == (const Species &rhs);
 
+    bool operator != (const Species &rhs);
 };
 
 //-----------
@@ -71,11 +72,9 @@ public:
 
     Creature(Species spe, int dir);
 
-    bool executeAction(object obj, Creature &target);
+    bool executeAction(object obj, Creature * const target);
 
-    bool isRelated(const Species &rhs);
-
-    string firstInital();
+    char firstInital();
 };
 
 
@@ -85,13 +84,16 @@ public:
 
 class Darwin{
 private:
-    int _x, _y;
+    int _x;
+    int _y;
     vector<Creature *> _board;
 
 public:
+    Darwin();
+
     Darwin(int x, int y);
 
-    void addCreature(const Creature &cr, const int &cr_x, const int &cr_y);
+    void addCreature(Creature &cr, const int &cr_x, const int &cr_y);
 
     void simulate(int cycles);
 
