@@ -264,22 +264,28 @@ void Darwin::simulate(int cycles){
 
     				//get the object and the target!
     				if ( *((*(_board[j]))._ptr_dir) == NORTH){
-    					if (j < (_x))
+    					if (j < _x){
     						foo = WALL;
-    					else if(_board[j -_x] == nullptr)
+                            bar = nullptr;
+                        }
+    					else if(_board[j -_x] == nullptr){
     						foo = EMPTY;
-
+                            bar = nullptr;
+                        }
                			else{
     						foo = ENTITY;
                				bar = _board[j-_x];
                			}
           			}
             		else if (*((*(_board[j]))._ptr_dir) == SOUTH){
-                		if (j > ((_x*_y) - _x))
+                		if (j >= ((_x*_y) - _x)){
     						foo = WALL;
-
-    					else if(_board[j+_x] == nullptr)
+                            bar = nullptr;
+                        }
+    					else if(_board[j+_x] == nullptr){
     						foo = EMPTY;
+                            bar = nullptr;
+                        }
 
     					else{
     						foo = ENTITY;
@@ -287,11 +293,15 @@ void Darwin::simulate(int cycles){
                			}
             		}
           			else if (*((*(_board[j]))._ptr_dir) == EAST){
-                		if ((j-1) < (_x*_y))
+                		if ((j+1)%_x == 0){
     						foo = WALL;
+                            bar = nullptr;
+                        }
 
-    					else if(_board[j+1] == nullptr)
+    					else if(_board[j+1] == nullptr){
     						foo = EMPTY;
+                            bar = nullptr;
+                        }
 
     					else{
     						foo = ENTITY;
@@ -299,36 +309,40 @@ void Darwin::simulate(int cycles){
                			}
             		}
             		else if (*((*(_board[j]))._ptr_dir) == WEST){
-                		if ((j) == 0)
+                		if ((j%_x) == 0){
     						foo = WALL;
-    					else if(_board[j-1] == ENTITY)
+                            bar = nullptr;
+                        }
+    					else if(_board[j-1] == nullptr){
     						foo = EMPTY;
+                            bar = nullptr;
+                        }
     					else{
     						foo = ENTITY;
                				bar = _board[j-1];
                			}
             		}
     				//execute
-    				if(_board[j].executeAction(foo, bar)){
+    				if((*(_board[j])).executeAction(foo, bar)){
 
     					//we need to hop the creature
     					if(foo == EMPTY){
-    						if ( *(_board[j]._ptr_dir) == NORTH){
-    							_board[j-x] = _board[j];
+    						if ( *((*(_board[j]))._ptr_dir) == NORTH){
+    							_board[j-_x] = _board[j];
     							_board[j] = nullptr;
-    							_map.at(j-x) = true;		//no need ??
+    							_map.at(j-_x) = true;		//no need ??
     						}
-    						else if ( *(_board[j]._ptr_dir) == SOUTH){
-    							_board[j+x] = _board[j];
+    						else if ( *((*(_board[j]))._ptr_dir) == SOUTH){
+    							_board[j+_x] = _board[j];
     							_board[j] = nullptr;
-    							_map.at(j+x) = true;
+    							_map.at(j+_x) = true;
     						}
-    						else if ( *(_board[j]._ptr_dir) == EAST){
+    						else if ( *((*(_board[j]))._ptr_dir) == EAST){
     							_board[j+1] = _board[j];
     							_board[j] = nullptr;
     							_map.at(j+1) = true;
     						}
-    						else if ( *(_board[j]._ptr_dir) == WEST){
+    						else if ( *((*(_board[j]))._ptr_dir) == WEST){
     							_board[j-1] = _board[j];
     							_board[j] = nullptr;
     							_map.at(j-1) = true;		//no need ??
