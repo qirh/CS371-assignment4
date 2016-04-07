@@ -17,7 +17,12 @@ Species::Species(string name) : _name(name){
 }
 
 void Species::addInstruction(string action){
-	transform(action.begin(), action.end(), action.begin(), toupper);
+	//transform(action.begin(), action.end(), action.begin(), toupper);
+    for (int i = 0; i < (int)action.length(); ++i){
+        if (action[i] >= 'a' && action[i] <= 'z'){
+            toupper(action[i]);
+        }
+    }
 
     instruction i;
 
@@ -42,30 +47,35 @@ void Species::addInstruction(string action){
 }
 
 void Species::addInstruction(string control, const int &branch){
-    transform(action.begin(), action.end(), action.begin(), toupper);
+    //transform(action.begin(), action.end(), action.begin(), toupper); //issue
+    for (int i = 0; i < (int)action.length(); ++i){
+        if (action[i] >= 'a' && action[i] <= 'z'){
+            toupper(action[i]);
+        }
+    }
 
     if (branch < 0)
     	throw invalid_argument( "invalid, branch is negative" );
 
     instruction i;
 
-    if (action == "IF_EMPTY"){
+    if (control == "IF_EMPTY"){
         i._name = IF_EMPTY;
         i._branch = branch;
     }
-    else if (action == "IF_WALL"){
+    else if (control == "IF_WALL"){
         i._name = IF_WALL;
         i._branch = branch;
     }
-    else if (action == "IF_RANDOM"){
+    else if (control == "IF_RANDOM"){
         i._name = IF_RANDOM;
         i._branch = branch;
     }
-    else if (action == "IF_ENEMY"){
+    else if (control == "IF_ENEMY"){
         i._name = IF_ENEMY;
         i._branch = branch;
     }
-    else if (action == "GO"){
+    else if (control == "GO"){
         i._name = GO;
         i._branch = branch;
     }
@@ -75,7 +85,7 @@ void Species::addInstruction(string control, const int &branch){
 	_instruction_set.push_back(i);
 }
 
-instruction Species::executeTilAction(object obj, const Creature &target, int &pc){
+instruction Species::executeTilAction(object obj, const Species &target, int &pc){
     bool done = false;
 
     while (!done){
@@ -104,7 +114,7 @@ instruction Species::executeTilAction(object obj, const Creature &target, int &p
             }
         }
         else if (_instruction_set[pc] == IF_ENEMY){
-            if ((obj == ENTITY) && (!target.isRelated(*this))){
+            if ((obj == ENTITY) && (*this != target)){
                 pc = _instruction_set[pc]._branch;
             }
             else{
@@ -124,6 +134,10 @@ instruction Species::executeTilAction(object obj, const Creature &target, int &p
 
 bool Species::operator == (const Species &rhs){
 	return this->_name == rhs._name;
+}
+
+bool Species::operator != (const Species &rhs){
+    return !(this->_name == rhs._name);
 }
 
 Creature::Creature(){}
@@ -186,10 +200,6 @@ bool Creature::executeAction(object obj, Creature &target){
 
     ++_pc;
     return false;
-}
-
-bool Creature::isRelated(const Species &rhs){
-    return (_spe == rhs);
 }
 
 bool Creature::firstInital(){

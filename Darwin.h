@@ -34,7 +34,7 @@ public:
 
 class Species{
 private:
-    vector<instruction> _instructions_set;
+    vector<instruction> _instruction_set;
     string _name;
 
 public:
@@ -48,10 +48,11 @@ public:
 
     void addInstruction(string control, const int &branch);
 
-    instruction executeTilAction(object obj, const Creature &rhs, int &pc);
+    instruction executeTilAction(object obj, const Species &rhs, int &pc);
 
     bool operator == (const Species &rhs);
 
+    bool operator != (const Species &rhs);
 };
 
 //-----------
@@ -72,8 +73,6 @@ public:
     Creature(Species spe, int dir);
 
     bool executeAction(object obj, Creature &target);
-
-    bool isRelated(const Species &rhs);
 
     string firstInital();
 };
