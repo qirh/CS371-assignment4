@@ -242,9 +242,10 @@ void Darwin::addCreature(Creature &cr, const int &cr_x, const int &cr_y){
 }
 
 void Darwin::simulate(int cycles){
-	cout << "*** Darwin " << _x << "x" << _y << " ***";
+	cout << "*** Darwin " << _x << "x" << _y << " ***" << endl;
 
 	//int is the j, bool will be true if we shouldn't execute this creature
+    cout << "Hi" << endl;
 	unordered_map<int,bool> _map;
 	object foo = EMPTY;
 	Creature * bar = nullptr;
