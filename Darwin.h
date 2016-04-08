@@ -55,7 +55,7 @@ public:
 
     void addInstruction(string control, const int &branch);
 
-    instruction executeTilAction(object obj, const Species * const rhs, int &pc);
+    /*  ***     */  instruction executeTilAction(object obj, const Species * const rhs, int &pc);
 
     bool operator == (const Species &rhs);
 
@@ -79,7 +79,7 @@ public:
 
     Creature(Species spe, int dir);
 
-    bool executeAction(object obj, Creature * const target);
+    /*  ***     */  bool executeAction(object obj, Creature * const target);
 
     char firstInital();
 };
@@ -100,11 +100,11 @@ public:
 
     Darwin(int x, int y);
 
-    void addCreature(Creature &cr, const int &cr_x, const int &cr_y);
+    /*  ***     */  void addCreature(Creature &cr, const int &cr_x, const int &cr_y);
 
-    void simulate(int cycles);
+    /*  ***     */  void simulate(int cycles);
 
-    void show();
+    void show(int count);
 };
 
 #endif

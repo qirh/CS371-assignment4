@@ -87,15 +87,15 @@ TEST(SpeciesFixture, addInstruction_3)
   tmp.push_back(d);
   tmp.push_back(f);
 
-  Species f ("food");
-  f.addInstruction("infect");
-  f.addInstruction("left");
-  f.addInstruction("if_wall", 3);
-  f.addInstruction("right");
-  f.addInstruction("hOp");
-  f.addInstruction("IF_RANDOM", 5);
+  Species food ("food");
+  food.addInstruction("infect");
+  food.addInstruction("left");
+  food.addInstruction("if_wall", 3);
+  food.addInstruction("right");
+  food.addInstruction("hOp");
+  food.addInstruction("IF_RANDOM", 5);
   
-  ASSERT_EQ(f._instruction_set, tmp);
+  ASSERT_EQ(food._instruction_set, tmp);
 }
 
 // -----------
@@ -125,10 +125,33 @@ TEST(CreatureFixture, executeAction_3)
 }
 
 // ------------
+// creature_firstInital
+// ------------
+TEST(CreatureFixture, firstInital_1) 
+{
+  Species food ("food");
+  Creature f (food, 2);
+  ASSERT_EQ(f.firstInital(), 'f');
+}
+TEST(CreatureFixture, firstInital_2) 
+{
+  Species trap ("trap");
+  Creature t (trap, 2);
+  ASSERT_EQ(t.firstInital(), 't');
+}
+TEST(CreatureFixture, firstInital_3) 
+{
+  Species best ("best");
+  Creature b (best, 2);
+  ASSERT_EQ(b.firstInital(), 'b');
+}
+
+// ------------
 // darwin_addCreature
 // ------------
 TEST(DarwinFixture, addCreature_1) 
 {
+
 }
 TEST(DarwinFixture, addCreature_2) 
 {
@@ -142,6 +165,7 @@ TEST(DarwinFixture, addCreature_3)
 // ------------
 TEST(DarwinFixture, simulate_1) 
 {
+
 }
 TEST(DarwinFixture, simulate_2) 
 {
@@ -155,6 +179,16 @@ TEST(DarwinFixture, simulate_3)
 // ------------
 TEST(DarwinFixture, show_1) 
 {
+  Species food("food");
+  food.addInstruction("LEFT");
+  food.addInstruction("GO", 0);
+
+  Creature t1_f1(food, 1);
+
+  Darwin t1_board(2, 2);
+  t1_board.addCreature(t1_f1, 0, 0);
+
+  t1_board.simulate(1);
 }
 TEST(DarwinFixture, show_2) 
 {
