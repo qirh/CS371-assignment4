@@ -1,24 +1,24 @@
-==5882== Memcheck, a memory error detector
-==5882== Copyright (C) 2002-2013, and GNU GPL'd, by Julian Seward et al.
-==5882== Using Valgrind-3.10.1 and LibVEX; rerun with -h for copyright info
-==5882== Command: ./TestDarwin
-==5882== 
+==3523== Memcheck, a memory error detector
+==3523== Copyright (C) 2002-2013, and GNU GPL'd, by Julian Seward et al.
+==3523== Using Valgrind-3.10.1 and LibVEX; rerun with -h for copyright info
+==3523== Command: ./TestDarwin
+==3523== 
 Running main() from gtest_main.cc
 [==========] Running 21 tests from 3 test cases.
 [----------] Global test environment set-up.
 [----------] 6 tests from SpeciesFixture
 [ RUN      ] SpeciesFixture.addInstruction_1
-[       OK ] SpeciesFixture.addInstruction_1 (31 ms)
+[       OK ] SpeciesFixture.addInstruction_1 (30 ms)
 [ RUN      ] SpeciesFixture.addInstruction_2
 [       OK ] SpeciesFixture.addInstruction_2 (6 ms)
 [ RUN      ] SpeciesFixture.addInstruction_3
 [       OK ] SpeciesFixture.addInstruction_3 (6 ms)
 [ RUN      ] SpeciesFixture.executeTilAction_1
-[       OK ] SpeciesFixture.executeTilAction_1 (1 ms)
+[       OK ] SpeciesFixture.executeTilAction_1 (0 ms)
 [ RUN      ] SpeciesFixture.executeTilAction_2
-[       OK ] SpeciesFixture.executeTilAction_2 (1 ms)
+[       OK ] SpeciesFixture.executeTilAction_2 (0 ms)
 [ RUN      ] SpeciesFixture.executeTilAction_3
-[       OK ] SpeciesFixture.executeTilAction_3 (1 ms)
+[       OK ] SpeciesFixture.executeTilAction_3 (0 ms)
 [----------] 6 tests from SpeciesFixture (51 ms total)
 
 [----------] 6 tests from CreatureFixture
@@ -33,22 +33,22 @@ Running main() from gtest_main.cc
 [ RUN      ] CreatureFixture.firstInital_2
 [       OK ] CreatureFixture.firstInital_2 (3 ms)
 [ RUN      ] CreatureFixture.firstInital_3
-[       OK ] CreatureFixture.firstInital_3 (3 ms)
-[----------] 6 tests from CreatureFixture (18 ms total)
+[       OK ] CreatureFixture.firstInital_3 (2 ms)
+[----------] 6 tests from CreatureFixture (17 ms total)
 
 [----------] 9 tests from DarwinFixture
 [ RUN      ] DarwinFixture.addCreature_1
-[       OK ] DarwinFixture.addCreature_1 (1 ms)
+[       OK ] DarwinFixture.addCreature_1 (0 ms)
 [ RUN      ] DarwinFixture.addCreature_2
 [       OK ] DarwinFixture.addCreature_2 (1 ms)
 [ RUN      ] DarwinFixture.addCreature_3
 [       OK ] DarwinFixture.addCreature_3 (1 ms)
 [ RUN      ] DarwinFixture.simulate_1
-[       OK ] DarwinFixture.simulate_1 (0 ms)
+[       OK ] DarwinFixture.simulate_1 (1 ms)
 [ RUN      ] DarwinFixture.simulate_2
 [       OK ] DarwinFixture.simulate_2 (1 ms)
 [ RUN      ] DarwinFixture.simulate_3
-[       OK ] DarwinFixture.simulate_3 (0 ms)
+[       OK ] DarwinFixture.simulate_3 (1 ms)
 [ RUN      ] DarwinFixture.show_1
 Turn = 0.
   01
@@ -60,25 +60,25 @@ Turn = 1.
 0 f.
 1 ..
 
-[       OK ] DarwinFixture.show_1 (71 ms)
+[       OK ] DarwinFixture.show_1 (74 ms)
 [ RUN      ] DarwinFixture.show_2
 [       OK ] DarwinFixture.show_2 (1 ms)
 [ RUN      ] DarwinFixture.show_3
 [       OK ] DarwinFixture.show_3 (1 ms)
-[----------] 9 tests from DarwinFixture (79 ms total)
+[----------] 9 tests from DarwinFixture (81 ms total)
 
 [----------] Global test environment tear-down
-[==========] 21 tests from 3 test cases ran. (173 ms total)
+[==========] 21 tests from 3 test cases ran. (174 ms total)
 [  PASSED  ] 21 tests.
-==5882== 
-==5882== HEAP SUMMARY:
-==5882==     in use at exit: 0 bytes in 0 blocks
-==5882==   total heap usage: 651 allocs, 651 frees, 86,267 bytes allocated
-==5882== 
-==5882== All heap blocks were freed -- no leaks are possible
-==5882== 
-==5882== For counts of detected and suppressed errors, rerun with: -v
-==5882== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==3523== 
+==3523== HEAP SUMMARY:
+==3523==     in use at exit: 0 bytes in 0 blocks
+==3523==   total heap usage: 651 allocs, 651 frees, 86,267 bytes allocated
+==3523== 
+==3523== All heap blocks were freed -- no leaks are possible
+==3523== 
+==3523== For counts of detected and suppressed errors, rerun with: -v
+==3523== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
 File 'Darwin.c++'
 Lines executed:52.59% of 232
 Branches executed:60.56% of 284

@@ -11,10 +11,12 @@ FILES :=    .travis.yml \
             Darwin.log
 
 CXX := g++-4.8
-CXXFLAGS := -pedantic -std=c++11 
+CXXFLAGS := -pedantic -std=c++11 -Wall
 LDFLAGS := -lgtest -lgtest_main -pthread 
 GCOV := gcov-4.8
 GCOVFLAGS := -fprofile-arcs -ftest-coverage
+GPROF      := gprof
+GPROFFLAGS := -pg
 VALGRIND := valgrind
 
 
@@ -70,14 +72,14 @@ Darwin.log:
 Doxyfile:
 	doxygen -g
 
-test: RunDarwin.tmp TestDarwin.out
+test: RunDarwin.out TestDarwin.out
 
 RunDarwin: Darwin.h Darwin.c++ RunDarwin.c++
-	$(CXX) $(CXXFLAGS) $(GCOVFLAGS) Darwin.c++ RunDarwin.c++ -o RunDarwin
+	$(CXX) $(CXXFLAGS) $(GCOVFLAGS) $(GPROFFLAGS) Darwin.c++ RunDarwin.c++ -o RunDarwin
 
-RunDarwin.tmp: RunDarwin
-	./RunDarwin > RunDarwin.tmp
-	diff RunDarwin.tmp RunDarwin.out
+RunDarwin.out: RunDarwin
+	./RunDarwin > RunDarwin.out
+	$(GPROF) ./RunDarwin
 
 TestDarwin: Darwin.h Darwin.c++ TestDarwin.c++
 	$(CXX) $(CXXFLAGS) $(GCOVFLAGS) Darwin.c++ TestDarwin.c++ -o TestDarwin $(LDFLAGS)

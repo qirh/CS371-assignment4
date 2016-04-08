@@ -362,6 +362,8 @@ void Darwin::simulate(int cycles){
                 }
             }
         }
+        // if(i == cycles)
+        //     cout<<endl;
     }
 }
 
