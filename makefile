@@ -11,8 +11,8 @@ FILES :=    .travis.yml \
             Darwin.log
 
 CXX := g++-4.8
-CXXFLAGS := -pedantic -std=c++11 -Wall
-LDFLAGS := -lgtest -lgtest_main -pthread
+CXXFLAGS := -pedantic -std=c++11 
+LDFLAGS := -lgtest -lgtest_main -pthread 
 GCOV := gcov-4.8
 GCOVFLAGS := -fprofile-arcs -ftest-coverage
 VALGRIND := valgrind
@@ -82,7 +82,7 @@ RunDarwin.tmp: RunDarwin
 TestDarwin: Darwin.h Darwin.c++ TestDarwin.c++
 	$(CXX) $(CXXFLAGS) $(GCOVFLAGS) Darwin.c++ TestDarwin.c++ -o TestDarwin $(LDFLAGS)
 
-TestDarwin.out: TestAllocator
+TestDarwin.out: TestDarwin
 	$(VALGRIND) ./TestDarwin > TestDarwin.out 2>&1
 	$(GCOV) -b Darwin.c++ | grep -A 5 "File 'Darwin.c++'" >> TestDarwin.out
 	$(GCOV) -b TestDarwin.c++ | grep -A 5 "File 'TestDarwin.c++'" >> TestDarwin.out

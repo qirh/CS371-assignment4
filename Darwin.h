@@ -11,7 +11,7 @@
 
 #include <string>
 #include <vector>
-
+#include "gtest/gtest.h"
 using namespace std;
 
 //---------
@@ -30,12 +30,19 @@ struct instruction{
 public:
     instr _name;
     int _branch;
+
+    bool operator == (const instruction &rhs);
+    bool operator == (const instruction &rhs) const;
 };
 
 class Species{
 private:
     vector<instruction> _instruction_set;
     string _name;
+
+    FRIEND_TEST(SpeciesFixture, addInstruction_1);
+    FRIEND_TEST(SpeciesFixture, addInstruction_2);
+    FRIEND_TEST(SpeciesFixture, addInstruction_3);
 
 public:
     const string * _ptr_name;

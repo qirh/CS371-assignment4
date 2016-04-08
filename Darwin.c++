@@ -10,6 +10,13 @@
 
 using namespace std;
 
+bool instruction::operator == (const instruction &rhs){
+    return (this->_name == rhs._name) && (this->_branch == rhs._branch);
+}
+bool instruction::operator == (const instruction &rhs) const{
+    return (this->_name == rhs._name) && (this->_branch == rhs._branch);
+}
+
 Species::Species(){}
 
 //Species methods
@@ -24,6 +31,8 @@ void Species::addInstruction(string action){
             toupper(action[i]);
         }
     }
+
+    transform(action.begin(), action.end(), action.begin(), ::toupper);
 
     instruction i;
 
@@ -40,7 +49,7 @@ void Species::addInstruction(string action){
         i._name = INFECT;
 
     else
-        throw invalid_argument( "invalid instruction" );
+        throw invalid_argument( "invalid instruction _name = " + action + " _branch = -1");
 
     i._branch = -1;     //since there's no branch
 
@@ -54,7 +63,8 @@ void Species::addInstruction(string control, const int &branch){
             toupper(control[i]);
         }
     }
-
+    transform(control.begin(), control.end(), control.begin(), ::toupper);
+    
     if (branch < 0)
         throw invalid_argument( "invalid, branch is negative" );
 
@@ -81,7 +91,7 @@ void Species::addInstruction(string control, const int &branch){
         i._branch = branch;
     }
     else
-        throw invalid_argument( "invalid instruction" );
+        throw invalid_argument( "invalid instruction _name = " + control + " _branch = ?" );
 
     _instruction_set.push_back(i);
 }
