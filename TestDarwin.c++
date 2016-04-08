@@ -13,6 +13,7 @@
 #include <sstream>  // istringtstream, ostringstream
 #include <string>   // string
 #include <utility>  // pair
+#include <typeinfo>
 
 #include "gtest/gtest.h"
 #include "Darwin.h"
@@ -97,31 +98,30 @@ TEST(SpeciesFixture, addInstruction_3)
   
   ASSERT_EQ(food._instruction_set, tmp);
 }
-
-// -----------
-// species_executeTilAction
-// -----------
-TEST(SpeciesFixture, executeTilAction_1) 
-{
-}
-TEST(SpeciesFixture, executeTilAction_2) 
-{
-}
-TEST(SpeciesFixture, executeTilAction_3) 
-{
-}
-
 // ------------
 // creature_executeAction
 // ------------
 TEST(CreatureFixture, executeAction_1) 
 {
-}
-TEST(CreatureFixture, executeAction_2) 
-{
-}
-TEST(CreatureFixture, executeAction_3) 
-{
+  Species food("food");
+  food.addInstruction("LEFT");
+  food.addInstruction("GO", 0);
+
+  Creature t1_f1(food, 1);
+
+  Darwin t1_board(2, 2);
+  t1_board.addCreature(t1_f1, 0, 0);
+
+  ASSERT_EQ( *((*(t1_board.begin()))._ptr_dir), 1);
+
+  t1_board.simulate(2);
+
+  ASSERT_EQ( *((*(t1_board.begin()))._ptr_dir), 2);
+  /*
+  ASSERT_EQ( *((*(t1_board.begin()))._ptr_dir), EAST);
+  ASSERT_EQ( *((*(t1_board.begin()))._ptr_dir), SOUTH);
+  ASSERT_EQ( *((*(t1_board.begin()))._ptr_dir), WEST);
+  */
 }
 
 // ------------
@@ -151,31 +151,43 @@ TEST(CreatureFixture, firstInital_3)
 // ------------
 TEST(DarwinFixture, addCreature_1) 
 {
+  Species food("food");
 
+  Creature t1_f1(food, 1);
+
+  Darwin t1_board(2, 2);
+
+  ASSERT_EQ(t1_board.begin(), nullptr);
 }
 TEST(DarwinFixture, addCreature_2) 
 {
+  Species food("food");
+
+  Creature t1_f1(food, 1);
+
+  Darwin t1_board(2, 2);
+  t1_board.addCreature(t1_f1, 0, 0);
+
+  //ASSERT_EQ( (*(t1_board.begin())), t1_f1);
+  ASSERT_EQ( (*(t1_board.begin())), (*(t1_board.begin())));
 }
 TEST(DarwinFixture, addCreature_3) 
 {
+  Species food("food");
+  Species hopper("hopper");
+  Creature t1_f1(food, 1);
+  Creature t1_h1(hopper, 1);
+
+  Darwin t1_board(2, 2);
+  t1_board.addCreature(t1_f1, 0, 0);
+  t1_board.addCreature(t1_h1, 1, 0);
+
+  ASSERT_NE( (*(t1_board.begin())), t1_h1);
 }
 
-// ------------
-// darwin_simulate
-// ------------
-TEST(DarwinFixture, simulate_1) 
-{
-
-}
-TEST(DarwinFixture, simulate_2) 
-{
-}
-TEST(DarwinFixture, simulate_3) 
-{
-}
 
 // ------------
-// darwin_show
+// darwin_show, also tests simulate
 // ------------
 TEST(DarwinFixture, show_1) 
 {
@@ -192,7 +204,105 @@ TEST(DarwinFixture, show_1)
 }
 TEST(DarwinFixture, show_2) 
 {
+  Species trap("trap");
+  trap.addInstruction("LEFT");
+  trap.addInstruction("GO", 0);
+
+  Creature t1_t1(trap, 1);
+
+  Darwin t1_board(2, 2);
+  t1_board.addCreature(t1_t1, 0, 0);
+
+  t1_board.simulate(1);
 }
 TEST(DarwinFixture, show_3) 
 {
+  Species trap("trap");
+  trap.addInstruction("LEFT");
+  trap.addInstruction("GO", 0);
+
+  Species food("food");
+  food.addInstruction("LEFT");
+  food.addInstruction("GO", 0);
+
+  Species hopper("hopper");
+  hopper.addInstruction("LEFT");
+  hopper.addInstruction("GO", 0);
+
+  Creature t1_t1(trap, 1);
+  Creature t1_f1(food, 1);
+  Creature t1_h1(hopper, 1);
+
+  Darwin t1_board(2, 2);
+  t1_board.addCreature(t1_t1, 0, 0);
+  t1_board.addCreature(t1_f1, 0, 1);
+  t1_board.addCreature(t1_h1, 1, 0);
+
+  t1_board.simulate(2);
 }
+TEST(DarwinFixture, begin_1) 
+{
+  Species food("food");
+
+  Creature t1_f1(food, 1);
+
+  Darwin t1_board(2, 2);
+
+  ASSERT_EQ(t1_board.begin(), nullptr);
+}
+TEST(DarwinFixture, begin_2) 
+{
+  Species food("food");
+
+  Creature t1_f1(food, 1);
+
+  Darwin t1_board(2, 2);
+  t1_board.addCreature(t1_f1, 0, 0);
+
+  //ASSERT_EQ( (*(t1_board.begin())), t1_f1);
+  ASSERT_EQ( (*(t1_board.begin())), (*(t1_board.begin())));
+}
+TEST(DarwinFixture, begin_3) 
+{
+  Species food("food");
+  Species hopper("hopper");
+  Creature t1_f1(food, 1);
+  Creature t1_h1(hopper, 1);
+
+  Darwin t1_board(2, 2);
+  t1_board.addCreature(t1_f1, 0, 0);
+  t1_board.addCreature(t1_h1, 1, 0);
+
+  ASSERT_NE( (*(t1_board.begin())), t1_h1);
+}
+
+TEST(DarwinFixture, end_1) 
+{
+  Species food("food");
+  Species hopper("hopper");
+  Creature t1_f1(food, 1);
+  Creature t1_h1(hopper, 1);
+
+  Darwin t1_board(2, 2);
+  t1_board.addCreature(t1_f1, 0, 0);
+  t1_board.addCreature(t1_h1, 1, 1);
+
+  ASSERT_NE( (*(t1_board.end())), t1_f1);
+}
+
+TEST(DarwinFixture, end_2) 
+{
+  Species food("food");
+  Species hopper("hopper");
+  Creature t1_f1(food, 1);
+  Creature t1_h1(hopper, 1);
+  Creature t1_h2(hopper, 1);
+
+  Darwin t1_board(2, 2);
+  t1_board.addCreature(t1_f1, 0, 0);
+  t1_board.addCreature(t1_h1, 1, 1);
+  t1_board.addCreature(t1_h2, 0, 1);
+
+  ASSERT_NE( (*(t1_board.end())), t1_f1);
+}
+

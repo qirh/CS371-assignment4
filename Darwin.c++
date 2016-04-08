@@ -17,6 +17,12 @@ bool instruction::operator == (const instruction &rhs){
 bool instruction::operator == (const instruction &rhs) const{
     return (this->_name == rhs._name) && (this->_branch == rhs._branch);
 }
+bool instruction::operator != (const instruction &rhs){
+    return (this->_name != rhs._name) || (this->_branch != rhs._branch);
+}
+bool instruction::operator != (const instruction &rhs) const{
+    return (this->_name != rhs._name) || (this->_branch != rhs._branch);
+}
 
 Species::Species(){}
 
@@ -153,8 +159,13 @@ instruction Species::executeTilAction(object obj, const Species * const target, 
 bool Species::operator == (const Species &rhs){
     return this->_name == rhs._name;
 }
-
+bool Species::operator == (const Species &rhs) const{
+    return this->_name == rhs._name;
+}
 bool Species::operator != (const Species &rhs){
+    return !(this->_name == rhs._name);
+}
+bool Species::operator != (const Species &rhs) const{
     return !(this->_name == rhs._name);
 }
 
@@ -227,6 +238,19 @@ bool Creature::executeAction(object obj, Creature * const target){
 
 char Creature::firstInital(){
     return tolower((*(_spe._ptr_name))[0]);
+}
+
+bool Creature::operator == (const Creature &rhs){
+    return (this->_spe == rhs._spe) && (this->_pc == rhs._pc) && (this->_dir == rhs._dir);
+}
+bool Creature::operator == (const Creature &rhs) const{
+    return (this->_spe == rhs._spe) && (this->_pc == rhs._pc) && (this->_dir == rhs._dir);
+}
+bool Creature::operator != (const Creature &rhs){
+    return !((this->_spe == rhs._spe) && (this->_pc == rhs._pc) && (this->_dir == rhs._dir));
+}
+bool Creature::operator != (const Creature &rhs) const{
+    return !((this->_spe == rhs._spe) && (this->_pc == rhs._pc) && (this->_dir == rhs._dir));
 }
 
 Darwin::Darwin(){}
@@ -369,48 +393,74 @@ void Darwin::simulate(int cycles){
 
 void Darwin::show(int count){
 
-        if (count < 10){
-            cout << "Turn = " << count << "." << endl;
-            cout << "  ";
-            for(int i = 0; i < _x; i++)
-                cout << i%10;
+    if (count < 10){
+        cout << "Turn = " << count << "." << endl;
+        cout << "  ";
+        for(int i = 0; i < _x; i++)
+            cout << i%10;
 
-            for(int j = 0; j < _x*_y; j++){
+        for(int j = 0; j < _x*_y; j++){
 
-                if ( (j%_x) == 0)
-                    cout << "\n" << (j/_y)%10 << " ";
+            if ( (j%_x) == 0)
+                cout << "\n" << (j/_y)%10 << " ";
 
-                if(_board[j] == nullptr){
-                    cout << ".";
-                }
-                else{
-                    cout << (*_board[j]).firstInital();
-                }
-
+            if(_board[j] == nullptr){
+                cout << ".";
+            }
+            else{
+                cout << (*_board[j]).firstInital();
             }
 
-            cout << "\n" << endl;
         }
-        else if (count % 100 == 0) {
-            cout << "Turn = " << count << "." << endl;
-            cout << "  ";
-            for(int i = 0; i < _x; i++)
-                cout << i%10;
 
-            for(int j = 0; j < _x*_y; j++){
+        cout << "\n" << endl;
+    }
+    else if (count % 100 == 0) {
+        cout << "Turn = " << count << "." << endl;
+        cout << "  ";
+        for(int i = 0; i < _x; i++)
+            cout << i%10;
 
-                if ( (j%_x) == 0)
-                    cout << "\n" << (j/_y)%10 << " ";
+        for(int j = 0; j < _x*_y; j++){
 
-                if(_board[j] == nullptr){
-                    cout << ".";
-                }
-                else{
-                    cout << (*_board[j]).firstInital();
-                }
+            if ( (j%_x) == 0)
+                cout << "\n" << (j/_y)%10 << " ";
 
+            if(_board[j] == nullptr){
+                cout << ".";
+            }
+            else{
+                cout << (*_board[j]).firstInital();
             }
 
-            cout << "\n" << endl;
         }
+
+        cout << "\n" << endl;
+    }
 }
+Creature * Darwin::begin(){
+    return _board[0];   
+}
+Creature * Darwin::begin() const{
+    return _board[0];   
+}
+Creature * Darwin::end(){
+    return _board.back(); 
+}
+Creature * Darwin::at(int i){
+    return _board.at(i);        
+}
+/*
+bool Darwin::operator == (const Darwin &rhs){
+    return (this->_x == rhs._x) && (this->_y == rhs._y) && (equal(this->_board.begin(), this->_board.back(), rhs._board.begin()));
+}
+bool Darwin::operator == (const Darwin &rhs) const{
+    return (this->_x == rhs._x) && (this->_y == rhs._y) && (this->_board == rhs._board);
+}
+bool Darwin::operator != (const Darwin &rhs){
+    return !((this->_x == rhs._x) && (this->_y == rhs._y) && (this->_board == rhs._board));
+}
+bool Darwin::operator != (const Darwin &rhs) const{
+    return !((this->_x == rhs._x) && (this->_y == rhs._y) && (this->_board == rhs._board));
+}
+*/
