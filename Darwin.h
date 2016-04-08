@@ -97,7 +97,7 @@ public:
 
     void simulate(int cycles);
 
-    void show();
+    void show(int count);
 };
 
 #endif

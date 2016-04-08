@@ -6,6 +6,7 @@
 #include <stdexcept>
 #include <cassert>
 #include <unordered_map>
+#include <utility>
 #include "Darwin.h"
 
 using namespace std;
@@ -247,13 +248,12 @@ void Darwin::simulate(int cycles){
     object foo = EMPTY;
     Creature * bar = nullptr;
 
-    for (int i = 0; i< cycles; i++){        //loop for cycles
-        cout << "Turn = " << i << "." << endl;
-        (*this).show();
-		_map.clear();
-		for (int j =0; j< _x*_y; j++){
+    for (int i = 0; i<= cycles; i++){        //loop for cycles
+        (*this).show(i);
+        _map.clear();
+        for (int j =0; j< _x*_y; j++){
 
-			if(_board[j] != nullptr){
+            if(_board[j] != nullptr){
     			try{
     				_map.at(j);
     			}
@@ -320,32 +320,33 @@ void Darwin::simulate(int cycles){
                				bar = _board[j-1];
                			}
             		}
-    				//execute
-    				if((*(_board[j])).executeAction(foo, bar)){
+                    //execute
+                    if((*(_board[j])).executeAction(foo, bar)){
 
     					//we need to hop the creature
     					if(foo == EMPTY){
     						if ( *((*(_board[j]))._ptr_dir) == NORTH){
     							_board[j-_x] = _board[j];
     							_board[j] = nullptr;
-    							_map.at(j-_x) = true;		//no need ??
     						}
     						else if ( *((*(_board[j]))._ptr_dir) == SOUTH){
     							_board[j+_x] = _board[j];
     							_board[j] = nullptr;
-    							_map.at(j+_x) = true;
+                                _map.insert(make_pair<int, bool>(j+_x, true));
     						}
     						else if ( *((*(_board[j]))._ptr_dir) == EAST){
     							_board[j+1] = _board[j];
     							_board[j] = nullptr;
-    							_map.at(j+1) = true;
+                                _map.insert(make_pair<int, bool>(j+1, true));
+                                //cout << "go east" << endl;
     						}
     						else if ( *((*(_board[j]))._ptr_dir) == WEST){
     							_board[j-1] = _board[j];
     							_board[j] = nullptr;
-    							_map.at(j-1) = true;		//no need ??
+                                //cout << "go west" << endl;
     						}
     					}
+                        //(*this).show();
     				}
     			}
             }
@@ -353,24 +354,50 @@ void Darwin::simulate(int cycles){
 	}
 }
 
-void Darwin::show(){
+void Darwin::show(int count){
 
-        cout << "  ";
+        if (count < 10){
+            cout << "Turn = " << count << "." << endl;
+            cout << "  ";
+            for(int i = 0; i < _x; i++)
+                cout << i%10;
 
-        for(int i = 0; i < _x; i++)
-            cout << i%10;
+            for(int j = 0; j < _x*_y; j++){
 
-        for(int j = 0; j < _x*_y; j++){
+                if ( (j%_x) == 0)
+                    cout << "\n" << (j/_y)%10 << " ";
 
-            if ( (j%_x) == 0)
-                cout << "\n" << (j/_y)%10 << " ";
+                if(_board[j] == nullptr){
+                    cout << ".";
+                }
+    			else{
+                    cout << (*_board[j]).firstInital();
+                }
 
-            if(_board[j] == nullptr){
-                cout << ".";
+    		}
+
+            cout << "\n" << endl;
+        }
+        else if (count % 100 == 0) {
+            cout << "Turn = " << count << "." << endl;
+            cout << "  ";
+            for(int i = 0; i < _x; i++)
+                cout << i%10;
+
+            for(int j = 0; j < _x*_y; j++){
+
+                if ( (j%_x) == 0)
+                    cout << "\n" << (j/_y)%10 << " ";
+
+                if(_board[j] == nullptr){
+                    cout << ".";
+                }
+                else{
+                    cout << (*_board[j]).firstInital();
+                }
+
             }
-			else{
-                cout << (*_board[j]).firstInital();
-            }
 
-		}
+            cout << "\n" << endl;
+        }
 }

@@ -126,9 +126,9 @@ int main () {
     Darwin t1_board(8, 8);
     t1_board.addCreature(t1_f1, 0, 0);
     t1_board.addCreature(t1_h1, 3, 3);
-    t1_board.addCreature(t1_h2, 3, 4);
+    t1_board.addCreature(t1_h2, 4, 3);
     t1_board.addCreature(t1_h3, 4, 4);
-    t1_board.addCreature(t1_h4, 4, 3);
+    t1_board.addCreature(t1_h4, 3, 4);
     t1_board.addCreature(t1_f2, 7, 7);
     t1_board.simulate(5);
 
@@ -153,11 +153,11 @@ int main () {
     Creature t2_r1(rover, 0);
     Creature t2_t2(trap, 3);
 
-    Darwin t2_board(7, 9);
+    Darwin t2_board(9, 7);
     t2_board.addCreature(t2_t1, 0, 0);
-    t2_board.addCreature(t2_h1, 3, 2);
-    t2_board.addCreature(t2_r1, 5, 4);
-    t2_board.addCreature(t2_t2, 6, 8);
+    t2_board.addCreature(t2_h1, 2, 3);
+    t2_board.addCreature(t2_r1, 4, 5);
+    t2_board.addCreature(t2_t2, 8, 6);
     t2_board.simulate(5);
 
     // ------------
@@ -182,6 +182,49 @@ int main () {
     Print the first 10 grids          (i.e. 0, 1, 2...9).
     Print every 100th grid after that (i.e. 100, 200, 300...1000).
     */
+
+    Creature t3_f1(food, 1);
+    Creature t3_f2(food, 1);
+    Creature t3_f3(food, 1);
+    Creature t3_f4(food, 1);
+    Creature t3_f5(food, 1);
+    Creature t3_f6(food, 1);
+    Creature t3_f7(food, 1);
+    Creature t3_f8(food, 1);
+    Creature t3_f9(food, 1);
+    Creature t3_f10(food, 1);
+    Creature t3_h1(hopper, 2);
+    Creature t3_h2(hopper, 3);
+    Creature t3_h3(hopper, 1);
+    Creature t3_h4(hopper, 0);
+    Creature t3_h5(hopper, 1);
+    Creature t3_h6(hopper, 3);
+    Creature t3_h7(hopper, 3);
+    Creature t3_h8(hopper, 2);
+    Creature t3_h9(hopper, 1);
+    Creature t3_h10(hopper, 0);
+    Creature t3_r1(rover, 2);
+    Creature t3_r2(rover, 0);
+    Creature t3_r3(rover, 1);
+    Creature t3_r4(rover, 1);
+    Creature t3_r5(rover, 3);
+    Creature t3_r6(rover, 3);
+    Creature t3_r7(rover, 0);
+    Creature t3_r8(rover, 2);
+    Creature t3_r9(rover, 1);
+    Creature t3_r10(rover, 2);
+    Creature t3_t1(trap, 0);
+    Creature t3_t2(trap, 1);
+    Creature t3_t3(trap, 2);
+    Creature t3_t4(trap, 3);
+    Creature t3_t5(trap, 0);
+    Creature t3_t6(trap, 0);
+    Creature t3_t7(trap, 1);
+    Creature t3_t8(trap, 1);
+    Creature t3_t9(trap, 2);
+    Creature t3_t10(trap, 2);
+
+    Darwin t3_board(72, 72);
 
     // ------------
     // darwin 72x72
