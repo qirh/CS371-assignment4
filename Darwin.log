@@ -1,3 +1,211 @@
+commit efcb0b21572701d9425a82281bc6baab23a585c9
+Author: System Administrator <root@sal7.local>
+Date:   Sat Apr 9 00:11:41 2016 -0700
+
+    sha is wrong for some reason
+
+commit 5a8b085acda2ab61cedfac61e5cb4167a0699c0a
+Author: saleh alghusson <almto3@hotmail.com>
+Date:   Fri Apr 8 04:05:58 2016 -0500
+
+    had a problem with submission
+
+commit 926cddfe6b8bd98f453457d5a83a429862021b2c
+Author: saleh alghusson <almto3@hotmail.com>
+Date:   Fri Apr 8 04:05:44 2016 -0500
+
+    had a problem with submission
+
+commit 01e52bfc67d98000b952f271623d78f722d9b6ff
+Author: saleh alghusson <almto3@hotmail.com>
+Date:   Thu Apr 7 22:10:18 2016 -0500
+
+    the plan is
+
+commit 1d9f78cd32380fcc5e9dffb35c8d107d68fa1806
+Author: System Administrator <root@sal7.local>
+Date:   Thu Apr 7 22:06:10 2016 -0500
+
+    pushing the uml
+
+commit 704f6aa5257b6d88d3adab46a302bab965ce2a52
+Author: System Administrator <root@sal7.local>
+Date:   Thu Apr 7 22:05:11 2016 -0500
+
+    changed the name
+
+commit 5459cb35620c1ef1b329e1c5bf784820d387942d
+Author: System Administrator <root@sal7.local>
+Date:   Thu Apr 7 22:04:34 2016 -0500
+
+    added uml again
+
+commit 2eaa0095afe1e69a13d98de1639d3518201423a3
+Merge: e5229d0 8b40b31
+Author: saleh alghusson <almto3@hotmail.com>
+Date:   Thu Apr 7 21:37:16 2016 -0500
+
+    last touches
+
+commit e5229d0bf06fc5f312ac9cd589fc0971329d0ad6
+Author: saleh alghusson <almto3@hotmail.com>
+Date:   Thu Apr 7 19:46:21 2016 -0500
+
+    added tests
+
+commit 8b40b314bc5eb91572d405a0e353bafb060cf40f
+Merge: 759d9d7 c0e69e5
+Author: vohl <acvohl@gmail.com>
+Date:   Thu Apr 7 19:43:08 2016 -0500
+
+    Merge branch 'dev' of https://github.com/almto3/cs371p-darwin into dev
+
+commit 759d9d7ff58879eeef904f35306a66b1cd714e2c
+Author: vohl <acvohl@gmail.com>
+Date:   Thu Apr 7 18:21:36 2016 -0500
+
+    throwing is terminating code, bug is only in show or simulate
+
+commit c0e69e5da4623e489c4d5252d1f9684d786f2c3c
+Merge: f1d8414 1ef956d
+Author: System Administrator <root@sal7.local>
+Date:   Thu Apr 7 18:15:39 2016 -0500
+
+    merging
+
+commit f1d841485dff412f40607e59702bc080019f6c4a
+Author: System Administrator <root@sal7.local>
+Date:   Thu Apr 7 18:14:54 2016 -0500
+
+    merging
+
+commit 1ef956db01434396140f77eabc347b964a7aa17f
+Author: vohl <acvohl@gmail.com>
+Date:   Thu Apr 7 17:45:14 2016 -0500
+
+    getting rid of a file
+
+commit 0c120357d96fa6ab77ce2b11c0c0eb933c5b210e
+Author: vohl <acvohl@gmail.com>
+Date:   Thu Apr 7 17:38:46 2016 -0500
+
+    everything compiles, seg fault though
+
+commit 3d99250d2c5f320cf51b8f03ebeedf1a1c63cc60
+Author: vohl <acvohl@gmail.com>
+Date:   Thu Apr 7 14:43:52 2016 -0500
+
+    making progress with the errors, onllly 7 more
+
+commit 128be8e97cefefc2ba7e80d02b755ddc33d45283
+Author: vohl <acvohl@gmail.com>
+Date:   Thu Apr 7 12:53:06 2016 -0500
+
+    just have to debug Darwin now
+
+commit effa603e3886b1f02e2b1ffb410aeaf5c7bcf332
+Author: vohl <acvohl@gmail.com>
+Date:   Thu Apr 7 11:33:43 2016 -0500
+
+    little changes
+
+commit a0e8c900038107ff38971f3cd7eb6a47c55f82a2
+Author: vohl <acvohl@gmail.com>
+Date:   Wed Apr 6 23:35:40 2016 -0500
+
+    .
+
+commit 0355001c841bba1d92777401f91603c5592df9bd
+Author: vohl <acvohl@gmail.com>
+Date:   Wed Apr 6 23:16:31 2016 -0500
+
+    _ptr_name was never set, fixed
+
+commit 42c90053b7ecdb85a77ba4a3380f19c0d76a7079
+Author: vohl <acvohl@gmail.com>
+Date:   Wed Apr 6 22:48:39 2016 -0500
+
+    just a little changes, not much
+
+commit 68261331beb59d946dac990b9c7fb8f0ea1c4814
+Author: saleh alghusson <almto3@hotmail.com>
+Date:   Tue Apr 5 20:50:37 2016 -0500
+
+    worked on simulate() and show()
+
+commit a45432d10cc5a699bf09ccd135ceee5d40194a6e
+Author: saleh alghusson <almto3@hotmail.com>
+Date:   Tue Apr 5 20:50:24 2016 -0500
+
+    worked on simulate() and show()
+
+commit 0d0b87a503fc6ab8d8eadce94788ee78d7d89670
+Author: vohl <acvohl@gmail.com>
+Date:   Tue Apr 5 00:50:29 2016 -0500
+
+    A little more done
+
+commit af03ce72123754bad544917743c81d1c1476d980
+Author: vohl <acvohl@gmail.com>
+Date:   Mon Apr 4 23:24:47 2016 -0500
+
+    A litte bit of editting
+
+commit 9e012ab03554f8b98a08a8f776cc2b57796fa072
+Author: vohl <acvohl@gmail.com>
+Date:   Mon Apr 4 22:56:48 2016 -0500
+
+    edditedinfect
+
+commit fd78ebaa0dad8ac17dbdbd54b2cad4f1594d7c7e
+Author: vohl <acvohl@gmail.com>
+Date:   Mon Apr 4 22:36:39 2016 -0500
+
+    need to add a copy assignment to Species
+
+commit 785e409ffd713dd167fd2f66801bcaaed0775835
+Author: vohl <acvohl@gmail.com>
+Date:   Mon Apr 4 21:32:05 2016 -0500
+
+    Species should be complete
+
+commit 46a0f5d2519770ce30727887264a0f449da373ce
+Author: Andrew Vohl <vohl0803@cs.utexas.edu>
+Date:   Mon Apr 4 15:53:07 2016 -0500
+
+    taking a break
+
+commit 69f64339835e4c1f24591afee4c96d2c842bcac5
+Merge: 22863bf 57a77be
+Author: Andrew Vohl <vohl0803@cs.utexas.edu>
+Date:   Mon Apr 4 15:52:46 2016 -0500
+
+    Merge branch 'dev' of https://github.com/almto3/cs371p-darwin into dev
+
+commit 57a77beb822b978697b611f79cf51fb1998ae733
+Author: saleh alghusson <almto3@hotmail.com>
+Date:   Mon Apr 4 15:15:29 2016 -0500
+
+    .gitignore and .travis
+
+commit 22863bfe1e6d64ba055f66c572a635d9c74dedc5
+Author: Andrew Vohl <vohl0803@cs.utexas.edu>
+Date:   Mon Apr 4 15:03:46 2016 -0500
+
+    Wrote the struct for instructions
+
+commit 27cf09e33a595a1614e64c44eceb158583fda648
+Author: vohl <acvohl@gmail.com>
+Date:   Mon Apr 4 14:37:09 2016 -0500
+
+    framework written up closes #1, #2, #3, #5
+
+commit e3a76aa7be42154c2ea4cbfae90bb1fd691f3f78
+Author: vohl <acvohl@gmail.com>
+Date:   Sun Apr 3 21:40:02 2016 -0500
+
+    file structure
+
 commit 92bac7c5b845067f2d5dfa680b57f26ae9c2f751
 Author: vohl <acvohl@gmail.com>
 Date:   Sun Apr 3 15:21:40 2016 -0500
