@@ -24,6 +24,7 @@ bool instruction::operator != (const instruction &rhs) const{
     return (this->_name != rhs._name) || (this->_branch != rhs._branch);
 }
 
+
 Species::Species(){}
 
 //Species methods
