@@ -4,6 +4,7 @@
 Object Oriented Programming Assignment #4. Done for CS 371p, taught by Glenn Downing in the spring of 2016
 
 * [Assignment details](https://www.cs.utexas.edu/users/downing/cs371p/projects/Darwin.html)
+* [UML](https://github.com/qirh/CS371-assignment4/blob/master/Darwin.png)
 
 
 ## Tools
